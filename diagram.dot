@@ -1,0 +1,51 @@
+digraph Madlibs {
+
+  // Light Mode
+  graph [pad="0.5", ranksep="0.4 equally", nodesep="0.6", fontsize="10pt"];
+  node [fontsize="10pt", shape="rectangle", margin="0.15"];
+  edge [fontsize="8pt", penwidth="1.5", arrowhead="vee"];
+
+  // Dark Mode
+//   graph [pad="0.5", ranksep="0.4 equally", nodesep="0.6", fontsize="10pt", bgcolor="black"];
+//   node [fontsize="10pt", shape="rectangle", margin="0.15", fontcolor="white", color="white", fillcolor="gray30", style="filled"];
+//   edge [fontsize="8pt", penwidth="1.5", arrowhead="vee", color="white", fontcolor="white"];
+
+  // Nodes & Edges
+
+  App [label="App\n"]
+  NavBar [label="Navigation"]
+  Routes [label="RoutesList\n"]
+  Company [label="CompanyDetail\n\nRoute: /companies/:company_id\nState: companyData {}, isLoading\nparams: {company_handle}\n\nGET Request"]
+  JobListing [label="JobList\n\nRoute: /jobs\nState: jobs [], searchFilter [], isLoading\nFn: handleSearch()\n\nGET Request"]
+  CompanyListing [label="CompanyList\n\nRoute: /companies\nState: companies [], searchFilter [], isLoading\nFn: handleSearch()\n\nGET Request"]
+  SearchBar [label="SearchForm\nState: formData"]
+  JobCardList [label="JobCardList"]
+
+
+  App -> NavBar
+  App -> Routes
+  Routes -> CompanyListing
+  Routes -> JobListing
+  Routes -> Company
+  Routes -> Homepage
+  CompanyListing -> CompanyCard [label="companyData {}"]
+
+
+  JobListing, Company -> JobCardList -> JobCard [label="jobData {}"]
+  JobListing, CompanyListing -> SearchBar [label="handleSearch()"]
+//   App -> Game
+
+//   Game -> StoryPicker [label="[titles]\n'buttonLabel'"]
+//   Game -> GameMode [label="{storyData}"]
+
+//   StoryPicker -> Button [label="'buttonLabel'"]
+
+//   GameMode -> Story [label="{storyData}\n'buttonLabel'\nresetStory()\n'storyTitle'"];
+//   GameMode -> StoryForm [label="[fields]\n'buttonLabel'\nsaveStory()"];
+
+//   Story -> Button [label="'buttonLabel'\nresetStory()"];
+//   StoryForm -> RenderFields [label="[fields]"];
+//   StoryForm -> Button [label="'buttonLabel'\nsaveStory()"];
+
+//   RenderFields -> Field [label="onChange()\n[formData]"]
+}
