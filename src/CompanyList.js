@@ -3,29 +3,29 @@ import CompanyCard from './CompanyCard';
 import SearchForm from './SearchForm';
 import JoblyApi from './api';
 
-const COMPANIES = [
-	{
-		handle: 'fakeApple',
-		name: 'Fake Apple, Inc.',
-		num_employees: 22,
-		description: 'Fruit company',
-		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-	},
-	{
-		handle: 'fakeApple',
-		name: 'Fake Apple, Inc.',
-		num_employees: 22,
-		description: 'Fruit company',
-		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-	},
-	{
-		handle: 'fakeApple',
-		name: 'Fake Apple, Inc.',
-		num_employees: 22,
-		description: 'Fruit company',
-		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-	},
-];
+// const COMPANIES = [
+// 	{
+// 		handle: 'fakeApple',
+// 		name: 'Fake Apple, Inc.',
+// 		num_employees: 22,
+// 		description: 'Fruit company',
+// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
+// 	},
+// 	{
+// 		handle: 'fakeApple',
+// 		name: 'Fake Apple, Inc.',
+// 		num_employees: 22,
+// 		description: 'Fruit company',
+// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
+// 	},
+// 	{
+// 		handle: 'fakeApple',
+// 		name: 'Fake Apple, Inc.',
+// 		num_employees: 22,
+// 		description: 'Fruit company',
+// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
+// 	},
+// ];
 
 /**
  *
@@ -53,6 +53,8 @@ function CompanyList() {
 	 * Accept search term from user and query backend API for filtered list of
 	 * companies.
 	 */
+  //TODO: limit interaction between SearchForm to allow SF to handle
+  // the actual inputs
 	function handleSearch (evt) {
 		evt.preventDefault();
 		const searchTerm = evt.target.searchTerm.value;
@@ -75,7 +77,7 @@ function CompanyList() {
 
 	if (isLoading) return <p>Loading...</p>
 
-
+  //TODO: consider limiting the data passed down to CompanyCard
 	return (
 		<div className='CompanyList'>
 			<h2>CompanyList</h2>

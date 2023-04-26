@@ -1,48 +1,7 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import JobCardList from './JobCardList';
-
-const COMPANY = {
-    handle: "fakeApple",
-    name: "Fake Apple, Inc.",
-    num_employees: 22,
-    description: "Fruit company",
-    logo_url: "https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png"
-  }
-
-const COMPANY_JOBS = [
-  {
-    "id": 1,
-    "title": "Conservator, furniture",
-    "salary": 110000,
-    "equity": "0",
-    "companyHandle": "watson-davis",
-    "companyName": "Watson-Davis"
-  },
-  {
-    "id": 2,
-    "title": "Information officer",
-    "salary": 200000,
-    "equity": "0",
-    "companyHandle": "hall-mills",
-    "companyName": "Hall-Mills"
-  },
-  {
-    "id": 3,
-    "title": "Consulting civil engineer",
-    "salary": 60000,
-    "equity": "0",
-    "companyHandle": "sellers-bryant",
-    "companyName": "Sellers-Bryant"
-  },
-  {
-    "id": 4,
-    "title": "Early years teacher",
-    "salary": 55000,
-    "equity": "0",
-    "companyHandle": "perez-miller",
-    "companyName": "Perez-Miller"
-  }]
-
-
+import JoblyApi from './api';
 
 /**
  *
@@ -53,21 +12,38 @@ const COMPANY_JOBS = [
  *  - none
  *
  * State:
- * - companyData - Object: { handle: "apple", name: "Apple, Inc.", ... }
+ * - companyData - Object: { handle: "apple", name: "Apple, Inc.", ... } //TODO: complete example obj
  * - isLoading - boolean - Toggles the loading screen (true by default)
  *
  * Routes -> CompanyDetail -> JobCardList
  *
  */
 function CompanyDetail () {
-  const company = COMPANY;
-  company.jobs = COMPANY_JOBS;
+  const [companyData, setCompanyData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { handle } = useParams();
+  console.log("handle", handle);
+
+  useEffect(function fetchCompanyOnMount() {
+		async function fetchCompany() {
+			setCompanyData(await JoblyApi.getCompany(handle));
+			setIsLoading(false);
+		}
+		fetchCompany();
+	}, []);
+  //TODO: look into missing 'handle' dependency
+
+  console.log("companyDataDetail", companyData);
+  if(isLoading) return <p>Loading...</p>
+
+  const { name, description, jobs } = companyData;
 
   return (
     <div className="CompanyDetail">
-      <h1>{company.name}</h1>
-      <p>{company.description}</p>
-      <JobCardList jobData={company.jobs} showCompany={false} />
+      <h1>{name}</h1>
+      <p>{description}</p>
+      <JobCardList jobData={jobs} showCompany={false} />
     </div>
   )
 };

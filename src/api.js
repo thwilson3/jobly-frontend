@@ -41,6 +41,7 @@ class JoblyApi {
 
 	static async getCompany(handle) {
 		let res = await this.request(`companies/${handle}`);
+    console.log("res getCompany", res);
 		return res.company;
 	}
 

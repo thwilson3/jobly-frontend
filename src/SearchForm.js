@@ -11,6 +11,7 @@
  * { CompanyList, JobList } -> SearchForm
  *
  */
+//TODO: add functionality to handle input itself
 function SearchForm ({handleSearch}) {
   return (
     <div className="SearchForm">

@@ -29,6 +29,7 @@ function JobList () {
 	 * Accept search term from user and query backend API for filtered list of
 	 * jobs.
 	 */
+  //TODO: have form handle more of the work here
 	function handleSearch (evt) {
 		evt.preventDefault();
 		const searchTerm = evt.target.searchTerm.value;
@@ -50,7 +51,7 @@ function JobList () {
 	}, []);
 
 	if (isLoading) return <p>Loading...</p>
-
+  //TODO: we're not rendering JobCardList below
   return (
   <div className="JobList">
     <h2>JobList</h2>
