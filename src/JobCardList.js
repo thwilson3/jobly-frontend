@@ -1,6 +1,5 @@
 import JobCard from './JobCard';
 
-
 /**
  *
  * Renders a list of job cards.
@@ -16,14 +15,30 @@ import JobCard from './JobCard';
  * { CompanyDetail, JobList } -> JobCardList -> JobCard
  *
  */
-function JobCardList ({jobData, company=null}) {
+function JobCardList({ jobListData, showCompany = false }) {
+	function cardsWithCompany() {
+		return jobListData.map(job => (
+			<JobCard
+				jobData={job}
+				key={job.id}
+				companyName={job.companyName}
+			/>
+		));
+	}
 
-  return (
-    <div className="JobCardList">
-      {jobData.map(job => (
-        <JobCard jobData={job} key={job.id} company={company} />
-        ))}
-    </div>
-  )
+	function cardsWithoutCompany() {
+		return jobListData.map(job => (
+			<JobCard
+				jobData={job}
+				key={job.id}
+			/>
+		));
+	}
+
+	return (
+		<div className='JobCardList'>
+			{showCompany ? cardsWithCompany() : cardsWithoutCompany()}
+		</div>
+	);
 }
 export default JobCardList;

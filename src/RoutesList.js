@@ -14,10 +14,9 @@ import JobList from './JobList';
  * State:
  * - none
  *
- * App -> RoutesList
+ * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
  *
  */
-//TODO: add all components to call graph
 function RoutesList () {
   return (
     <Routes>
@@ -25,7 +24,7 @@ function RoutesList () {
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:handle" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
-      <Route path="*" element={<Navigate to="/" />} /> {/* <-- Another Option */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

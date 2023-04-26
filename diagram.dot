@@ -31,7 +31,8 @@ digraph Madlibs {
   CompanyListing -> CompanyCard [label="companyData {}"]
 
 
-  JobListing, Company -> JobCardList -> JobCard [label="jobData {}"]
+  JobListing -> JobCardList [label="jobData {}\nshowCompany"]
+  Company -> JobCardList -> JobCard [label="jobData {}"]
   JobListing, CompanyListing -> SearchBar [label="handleSearch()"]
 //   App -> Game
 

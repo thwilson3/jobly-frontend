@@ -11,8 +11,14 @@
  * { CompanyList, JobList } -> SearchForm
  *
  */
-//TODO: add functionality to handle input itself
-function SearchForm ({handleSearch}) {
+function SearchForm ({applyFilter}) {
+
+	function handleSearch (evt) {
+		evt.preventDefault();
+		const searchTerm = evt.target.searchTerm.value;
+    applyFilter(searchTerm)
+	}
+
   return (
     <div className="SearchForm">
       <form onSubmit={handleSearch}>

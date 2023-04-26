@@ -14,10 +14,9 @@ import { NavLink } from "react-router-dom";
  * App -> Navigation
  *
  */
-//TODO: classname in outer div needed
 function Navigation() {
   return(
-    <div>
+    <div className="Navigation">
       <NavLink to='/'>Home</NavLink>
       <NavLink to='/companies'>Companies</NavLink>
       <NavLink to='/jobs'>Jobs</NavLink>

@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import JoblyApi from "./api";
-import SearchForm from "./SearchForm";
-import JobCard from "./JobCard";
+import { useState, useEffect } from 'react';
+import JoblyApi from './api';
+import SearchForm from './SearchForm';
+import JobCard from './JobCard';
+import JobCardList from './JobCardList';
 
 /**
  *
@@ -19,30 +20,26 @@ import JobCard from "./JobCard";
  * RoutesList -> JobList -> { JobCardList, SearchForm }
  *
  */
-function JobList () {
-  const [jobs, setJobs] = useState(null);
+function JobList() {
+	const [jobs, setJobs] = useState(null);
 	const [searchFilter, setSearchFilter] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-
 
 	/**
 	 * Accept search term from user and query backend API for filtered list of
 	 * jobs.
 	 */
-  //TODO: have form handle more of the work here
-	function handleSearch (evt) {
-		evt.preventDefault();
-		const searchTerm = evt.target.searchTerm.value;
+	function applyFilter(searchTerm) {
 		async function fetchFilteredJobs() {
-			setJobs(await JoblyApi.getJobs())
+			setJobs(await JoblyApi.getJobs({title: searchTerm}));
 			setSearchFilter(searchTerm);
 			setIsLoading(false);
 		}
 		fetchFilteredJobs();
 		setIsLoading(true);
-	};
+	}
 
-  useEffect(function fetchJobsOnMount() {
+	useEffect(function fetchJobsOnMount() {
 		async function fetchJobs() {
 			setJobs(await JoblyApi.getJobs());
 			setIsLoading(false);
@@ -50,20 +47,18 @@ function JobList () {
 		fetchJobs();
 	}, []);
 
-	if (isLoading) return <p>Loading...</p>
-  //TODO: we're not rendering JobCardList below
-  return (
-  <div className="JobList">
-    <h2>JobList</h2>
-    <SearchForm handleSearch={handleSearch} />
-    {jobs.map(job => (
-      <JobCard
-      key={job.id}
-      jobData={job}
-      />
-    ))}
-  </div>
-  );
-};
+	if (isLoading) return <p>Loading...</p>;
+	return (
+		<div className='JobList'>
+			<h2>JobList</h2>
+			<SearchForm applyFilter={applyFilter} />
+
+			<JobCardList
+				jobListData={jobs}
+				showCompany={true}
+			/>
+		</div>
+	);
+}
 
 export default JobList;

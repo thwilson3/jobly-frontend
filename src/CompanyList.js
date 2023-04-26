@@ -53,11 +53,7 @@ function CompanyList() {
 	 * Accept search term from user and query backend API for filtered list of
 	 * companies.
 	 */
-  //TODO: limit interaction between SearchForm to allow SF to handle
-  // the actual inputs
-	function handleSearch (evt) {
-		evt.preventDefault();
-		const searchTerm = evt.target.searchTerm.value;
+	function applyFilter (searchTerm) {
 		async function fetchFilteredCompanies() {
 			setCompanies(await JoblyApi.getCompanies({nameLike: searchTerm}))
 			setSearchFilter(searchTerm);
@@ -77,15 +73,18 @@ function CompanyList() {
 
 	if (isLoading) return <p>Loading...</p>
 
-  //TODO: consider limiting the data passed down to CompanyCard
 	return (
 		<div className='CompanyList'>
 			<h2>CompanyList</h2>
-			<SearchForm handleSearch={handleSearch} />
 			{companies.map(company => (
 				<CompanyCard
 					key={company.handle}
-					companyData={company}
+					companyData={{
+						name: company.name,
+						description: company.description,
+						logoUrl: company.logoUrl,
+						handle: company.handle,
+					}}
 				/>
 			))}
 		</div>
