@@ -3,7 +3,7 @@
  * Renders a card to display job data.
  *
  * Props:
- *  - jobData - Object: { title: "assistant", salary: "250,000", ... }
+ *  - jobData - Object: { title: "assistant", salary: 250000, ... }
  *  - company(optional) - String: "Apple Inc."
  *
  * State:
