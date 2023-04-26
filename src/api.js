@@ -45,6 +45,7 @@ class JoblyApi {
 	}
 
 	/** Get array of all companies. Also filter by name if passed query parameter. */
+
 	static async getCompanies(query = {}) {
 		const res =
 			query.size === 0
@@ -53,6 +54,13 @@ class JoblyApi {
 		return res.companies;
 	}
 
+  static async getJobs(query = {}) {
+		const res =
+			query.size === 0
+				? await this.request(`jobs/`)
+				: await this.request(`jobs/`, query);
+		return res.jobs;
+	}
 	// obviously, you'll add a lot here ...
 }
 
