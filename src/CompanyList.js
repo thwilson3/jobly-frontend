@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import CompanyCard from './CompanyCard';
-import SearchForm from './SearchForm';
-import JoblyApi from './api';
-import { Navigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import CompanyCard from "./CompanyCard";
+import SearchForm from "./SearchForm";
+import JoblyApi from "./api";
+import { Navigate } from "react-router-dom";
 
 /**
  *
@@ -22,55 +22,57 @@ import { Navigate } from 'react-router-dom';
  */
 
 function CompanyList() {
-	const [companies, setCompanies] = useState(null);
-	const [searchFilter, setSearchFilter] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+  const [companies, setCompanies] = useState(null);
+  const [searchFilter, setSearchFilter] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-	/**
-	 * Accept search term from user and query backend API for filtered list of
-	 * companies.
-	 */
-	function applyFilter(searchTerm) {
-		if (!searchTerm) {
-			setSearchFilter(null);
-			return <Navigate to='/companies' />;
-		} else {
-			setIsLoading(true);
-			setSearchFilter(searchTerm);
-		}
-	}
+  /**
+   * Accept search term from user and query backend API for filtered list of
+   * companies.
+   */
+  function applyFilter(searchTerm) {
+    if (!searchTerm) {
+      setSearchFilter(null);
+      return <Navigate to="/companies" />;
+    } else {
+      if (searchTerm !== searchFilter) {
+        setIsLoading(true);
+        setSearchFilter(searchTerm);
+      }
+    }
+  }
 
-	useEffect(
-		function fetchCompaniesOnMount() {
-			async function fetchCompanies() {
-				try {
-					setCompanies(await JoblyApi.getCompanies({ nameLike: searchFilter }));
-					setIsLoading(false);
-				} catch (error) {
-					setIsLoading(false);
-					<Navigate to='/' />;
-				}
-			}
-			fetchCompanies();
-		},
-		[searchFilter]
-	);
+  useEffect(
+    function fetchCompaniesOnMount() {
+      async function fetchCompanies() {
+        try {
+          setCompanies(await JoblyApi.getCompanies({ nameLike: searchFilter }));
+          setIsLoading(false);
+        } catch (error) {
+          setIsLoading(false);
+          <Navigate to="/" />;
+        }
+      }
+      fetchCompanies();
+    },
+    [searchFilter]
+  );
 
-	if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
 
-	return (
-		<div className='CompanyList'>
-			<h2>CompanyList</h2>
-			<SearchForm applyFilter={applyFilter} searchTerm={searchFilter}/>
+  return (
+    <div className="CompanyList">
+      <h2>CompanyList</h2>
+      <SearchForm applyFilter={applyFilter} searchTerm={searchFilter} />
 
-			{companies.map(({ name, description, logoUrl, handle }) => (
-				<CompanyCard
-					key={handle}
-					companyData={{ name, description, logoUrl, handle }}
-				/>
-			))}
-		</div>
-	);
+      {companies.map(({ name, description, logoUrl, handle }) => (
+        <CompanyCard
+          key={handle}
+          companyData={{ name, description, logoUrl, handle }}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default CompanyList;
