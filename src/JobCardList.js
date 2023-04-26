@@ -1,7 +1,7 @@
 import JobCard from './JobCard';
 
-function JobCardList ({jobData, showCompany}) {
-  
+function JobCardList ({jobData}) {
+
   return (
     <div className="JobCardList">
       {jobData.map(job => (
