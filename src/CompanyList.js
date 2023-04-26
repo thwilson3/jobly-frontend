@@ -2,30 +2,7 @@ import { useState, useEffect } from 'react';
 import CompanyCard from './CompanyCard';
 import SearchForm from './SearchForm';
 import JoblyApi from './api';
-
-// const COMPANIES = [
-// 	{
-// 		handle: 'fakeApple',
-// 		name: 'Fake Apple, Inc.',
-// 		num_employees: 22,
-// 		description: 'Fruit company',
-// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-// 	},
-// 	{
-// 		handle: 'fakeApple',
-// 		name: 'Fake Apple, Inc.',
-// 		num_employees: 22,
-// 		description: 'Fruit company',
-// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-// 	},
-// 	{
-// 		handle: 'fakeApple',
-// 		name: 'Fake Apple, Inc.',
-// 		num_employees: 22,
-// 		description: 'Fruit company',
-// 		logo_url: 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png',
-// 	},
-// ];
+import { Navigate } from 'react-router-dom';
 
 /**
  *
@@ -53,38 +30,43 @@ function CompanyList() {
 	 * Accept search term from user and query backend API for filtered list of
 	 * companies.
 	 */
-	function applyFilter (searchTerm) {
-		async function fetchFilteredCompanies() {
-			setCompanies(await JoblyApi.getCompanies({nameLike: searchTerm}))
+	function applyFilter(searchTerm) {
+		if (!searchTerm) {
+			setSearchFilter(null);
+			return <Navigate to='/companies' />;
+		} else {
+			setIsLoading(true);
 			setSearchFilter(searchTerm);
-			setIsLoading(false);
 		}
-		fetchFilteredCompanies();
-		setIsLoading(true);
 	}
 
-	useEffect(function fetchCompaniesOnMount() {
-		async function fetchCompanies() {
-			setCompanies(await JoblyApi.getCompanies());
-			setIsLoading(false);
-		}
-		fetchCompanies();
-	}, []);
+	useEffect(
+		function fetchCompaniesOnMount() {
+			async function fetchCompanies() {
+				try {
+					setCompanies(await JoblyApi.getCompanies({ nameLike: searchFilter }));
+					setIsLoading(false);
+				} catch (error) {
+					setIsLoading(false);
+					<Navigate to='/' />;
+				}
+			}
+			fetchCompanies();
+		},
+		[searchFilter]
+	);
 
-	if (isLoading) return <p>Loading...</p>
+	if (isLoading) return <p>Loading...</p>;
 
 	return (
 		<div className='CompanyList'>
 			<h2>CompanyList</h2>
-			{companies.map(company => (
+			<SearchForm applyFilter={applyFilter} />
+
+			{companies.map(({ name, description, logoUrl, handle }) => (
 				<CompanyCard
-					key={company.handle}
-					companyData={{
-						name: company.name,
-						description: company.description,
-						logoUrl: company.logoUrl,
-						handle: company.handle,
-					}}
+					key={handle}
+					companyData={{ name, description, logoUrl, handle }}
 				/>
 			))}
 		</div>

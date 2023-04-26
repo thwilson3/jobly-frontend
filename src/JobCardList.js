@@ -15,29 +15,16 @@ import JobCard from './JobCard';
  * { CompanyDetail, JobList } -> JobCardList -> JobCard
  *
  */
-function JobCardList({ jobListData, showCompany = false }) {
-	function cardsWithCompany() {
-		return jobListData.map(job => (
-			<JobCard
-				jobData={job}
-				key={job.id}
-				companyName={job.companyName}
-			/>
-		));
-	}
-
-	function cardsWithoutCompany() {
-		return jobListData.map(job => (
-			<JobCard
-				jobData={job}
-				key={job.id}
-			/>
-		));
-	}
-
+function JobCardList({ jobs, showCompany = false }) {
 	return (
 		<div className='JobCardList'>
-			{showCompany ? cardsWithCompany() : cardsWithoutCompany()}
+			{jobs.map(job => (
+				<JobCard
+					jobData={job}
+					key={job.id}
+					companyName={showCompany ? job.companyName : null}
+				/>
+			))}
 		</div>
 	);
 }

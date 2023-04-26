@@ -62,7 +62,7 @@ class JoblyApi {
 				: await this.request(`jobs/`, query);
 		return res.jobs;
 	}
-	// obviously, you'll add a lot here ...
+
 }
 
 export default JoblyApi;

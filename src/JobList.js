@@ -54,7 +54,7 @@ function JobList() {
 			<SearchForm applyFilter={applyFilter} />
 
 			<JobCardList
-				jobListData={jobs}
+				jobs={jobs}
 				showCompany={true}
 			/>
 		</div>

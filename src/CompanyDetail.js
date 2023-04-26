@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import JobCardList from './JobCardList';
 import JoblyApi from './api';
 
@@ -55,17 +55,20 @@ function CompanyDetail() {
 	console.log('handle', handle);
 
 	useEffect(
-		function fetchCompanyOnMount() {
-			async function fetchCompany() {
-				setCompanyData(await JoblyApi.getCompany(handle));
-				setIsLoading(false);
+    function fetchCompanyOnMount() {
+      async function fetchCompany() {
+        try {
+          setCompanyData(await JoblyApi.getCompany(handle));
+        } catch (error) {
+          <Navigate to='/companies' />
+        }
+        setIsLoading(false);
 			}
 			fetchCompany();
 		},
 		[handle]
 	);
 
-	console.log('companyDataDetail', companyData);
 	if (isLoading) return <p>Loading...</p>;
 
 	const { name, description, jobs } = companyData;
@@ -75,7 +78,7 @@ function CompanyDetail() {
 			<h1>{name}</h1>
 			<p>{description}</p>
 			<JobCardList
-				jobListData={jobs}
+				jobs={jobs}
 				showCompany={false}
 			/>
 		</div>
