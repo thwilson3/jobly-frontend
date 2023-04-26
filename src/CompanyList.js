@@ -56,9 +56,13 @@ function CompanyList() {
 	function handleSearch (evt) {
 		evt.preventDefault();
 		const searchTerm = evt.target.searchTerm.value;
-		// make call to api.js function to filter search results.
-		// call setSearchFilter
-		// clear the form
+		async function fetchFilterdCompanies() {
+			setCompanies(await JoblyApi.getCompanies({nameLike: searchTerm}))
+			setSearchFilter(searchTerm);
+			setIsLoading(false);
+		}
+		fetchFilterdCompanies();
+		setIsLoading(true);
 	}
 
 	useEffect(function fetchCompaniesOnMount() {
@@ -68,8 +72,6 @@ function CompanyList() {
 		}
 		fetchCompanies();
 	}, []);
-
-
 
 	if (isLoading) return <p>Loading...</p>
 
