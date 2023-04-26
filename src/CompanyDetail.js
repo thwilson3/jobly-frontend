@@ -42,6 +42,9 @@ const COMPANY_JOBS = [
     "companyName": "Perez-Miller"
   }]
 
+
+
+
 function CompanyDetail () {
   const company = COMPANY;
   company.jobs = COMPANY_JOBS;
