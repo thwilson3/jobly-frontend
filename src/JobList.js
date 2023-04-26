@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
+import { Navigate } from 'react-router-dom';
 import SearchForm from './SearchForm';
 import JobCard from './JobCard';
 import JobCardList from './JobCardList';
@@ -29,29 +30,39 @@ function JobList() {
 	 * Accept search term from user and query backend API for filtered list of
 	 * jobs.
 	 */
-	function applyFilter(searchTerm) {
-		async function fetchFilteredJobs() {
-			setJobs(await JoblyApi.getJobs({title: searchTerm}));
-			setSearchFilter(searchTerm);
-			setIsLoading(false);
-		}
-		fetchFilteredJobs();
-		setIsLoading(true);
-	}
+  function applyFilter(searchTerm) {
+		if (!searchTerm) {
+			setSearchFilter(null);
+			return <Navigate to='/jobs' />;
+		} else {
+      if(searchTerm !== searchFilter) {
+        setIsLoading(true);
+        setSearchFilter(term => term = searchTerm);
+      };
+		};
+	};
 
-	useEffect(function fetchJobsOnMount() {
-		async function fetchJobs() {
-			setJobs(await JoblyApi.getJobs());
-			setIsLoading(false);
-		}
-		fetchJobs();
-	}, []);
+	useEffect(
+		function fetchJobsOnMount() {
+			async function fetchJobs() {
+				try {
+					setJobs(await JoblyApi.getJobs({ title: searchFilter }));
+					setIsLoading(false);
+				} catch (error) {
+					setIsLoading(false);
+					<Navigate to='/' />;
+				}
+			}
+			fetchJobs();
+		},
+		[searchFilter]
+	);
 
 	if (isLoading) return <p>Loading...</p>;
 	return (
 		<div className='JobList'>
 			<h2>JobList</h2>
-			<SearchForm applyFilter={applyFilter} />
+			<SearchForm applyFilter={applyFilter} searchTerm={searchFilter} />
 
 			<JobCardList
 				jobs={jobs}
