@@ -1,5 +1,19 @@
 import { NavLink } from "react-router-dom";
 
+
+/**
+ *
+ * Renders a navbar.
+ *
+ * Props:
+ *  - none
+ *
+ * State:
+ * - none
+ *
+ * App -> Navigation
+ *
+ */
 function Navigation() {
   return(
     <div>

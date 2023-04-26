@@ -1,5 +1,14 @@
 
-/** Renders homepage */
+/** Renders homepage
+ *
+ *  props:
+ *  -none
+ *
+ *  state:
+ *  -none
+ *
+ *  Routes -> Homepage
+*/
 function Homepage() {
   return (
     <div className="Homepage">

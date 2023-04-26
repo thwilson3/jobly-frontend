@@ -40,7 +40,7 @@ const COMPANIES = [
  * - searchFilter - string - Current search term (null by default)
  * - isLoading - boolean - Toggles the loading screen (true by default)
  *
- * CompanyList -> { CompanyCard, SearchForm }
+ * Routes -> CompanyList -> { CompanyCard, SearchForm }
  *
  */
 

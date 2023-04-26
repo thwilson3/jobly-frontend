@@ -44,7 +44,21 @@ const COMPANY_JOBS = [
 
 
 
-
+/**
+ *
+ * Renders a page to display all company details and jobs associated with
+ * that company.
+ *
+ * Props:
+ *  - none
+ *
+ * State:
+ * - companyData - Object: { handle: "apple", name: "Apple, Inc.", ... }
+ * - isLoading - boolean - Toggles the loading screen (true by default)
+ *
+ * Routes -> CompanyDetail -> JobCardList
+ *
+ */
 function CompanyDetail () {
   const company = COMPANY;
   company.jobs = COMPANY_JOBS;

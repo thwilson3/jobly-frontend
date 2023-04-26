@@ -1,3 +1,18 @@
+/**
+ *
+ * Renders a card to display job data.
+ *
+ * Props:
+ *  - jobData - Object: { title: "assistant", salary: "250,000", ... }
+ *  - company(optional) - String: "Apple Inc."
+ *
+ * State:
+ *  - none
+ *
+ * JobCardList -> JobCard
+ *
+ */
+
 function JobCard ({jobData, company=null}) {
   const {title, salary, equity} = jobData;
   return (

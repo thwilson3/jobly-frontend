@@ -4,6 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
 import Navigation from './Navigation';
 
+
+/**
+ *
+ * Renders App
+ *
+ * Props:
+ *  - none
+ *
+ * State:
+ * - none
+ *
+ * App -> { Navigation, RoutesList }
+ *
+ */
 function App() {
 	return (
 		<div className='App'>

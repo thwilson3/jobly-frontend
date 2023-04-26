@@ -1,3 +1,16 @@
+/**
+ *
+ * Renders a search form with submit button.
+ *
+ * Props:
+ *  - none
+ *
+ * State:
+ * - none
+ *
+ * { CompanyList, JobList } -> SearchForm
+ *
+ */
 function SearchForm ({handleSearch}) {
   return (
     <div className="SearchForm">
