@@ -61,7 +61,7 @@ function CompanyList() {
 	return (
 		<div className='CompanyList'>
 			<h2>CompanyList</h2>
-			<SearchForm applyFilter={applyFilter} />
+			<SearchForm applyFilter={applyFilter} searchTerm={searchFilter}/>
 
 			{companies.map(({ name, description, logoUrl, handle }) => (
 				<CompanyCard
