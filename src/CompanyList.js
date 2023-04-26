@@ -56,12 +56,12 @@ function CompanyList() {
 	function handleSearch (evt) {
 		evt.preventDefault();
 		const searchTerm = evt.target.searchTerm.value;
-		async function fetchFilterdCompanies() {
+		async function fetchFilteredCompanies() {
 			setCompanies(await JoblyApi.getCompanies({nameLike: searchTerm}))
 			setSearchFilter(searchTerm);
 			setIsLoading(false);
 		}
-		fetchFilterdCompanies();
+		fetchFilteredCompanies();
 		setIsLoading(true);
 	}
 
