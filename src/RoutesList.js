@@ -20,19 +20,43 @@ import ProfileForm from './ProfileForm';
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
  *
  */
-function RoutesList () {
-  return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={<CompanyList />} />
-      <Route path="/companies/:handle" element={<CompanyDetail />} />
-      <Route path="/jobs" element={<JobList />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/signup" element={<SignUpForm />} />
-      <Route path="/profile" element={<ProfileForm />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  );
+function RoutesList({ handleRegisterRequest }) {
+	return (
+		<Routes>
+			<Route
+				path='/'
+				element={<Homepage />}
+			/>
+			<Route
+				path='/companies'
+				element={<CompanyList />}
+			/>
+			<Route
+				path='/companies/:handle'
+				element={<CompanyDetail />}
+			/>
+			<Route
+				path='/jobs'
+				element={<JobList />}
+			/>
+			<Route
+				path='/login'
+				element={<LoginForm />}
+			/>
+			<Route
+				path='/signup'
+				element={<SignUpForm handleRequest={handleRegisterRequest} />}
+			/>
+			<Route
+				path='/profile'
+				element={<ProfileForm />}
+			/>
+			<Route
+				path='*'
+				element={<Navigate to='/' />}
+			/>
+		</Routes>
+	);
 }
 
 export default RoutesList;

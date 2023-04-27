@@ -44,7 +44,7 @@ function SignUpForm({ handleRequest }) {
 					id='SignUpForm-form'
 					onSubmit={handleSubmit}>
 					<div>
-						<label for='username'>Username</label>
+						<label htmlFor='username'>Username</label>
 						<input
 							id='username'
 							name='username'
@@ -52,7 +52,7 @@ function SignUpForm({ handleRequest }) {
 					</div>
 
 					<div>
-						<label for='password'>Password</label>
+						<label htmlFor='password'>Password</label>
 						<input
 							id='password'
 							name='password'
@@ -60,21 +60,21 @@ function SignUpForm({ handleRequest }) {
 							onChange={handleChange}></input>
 					</div>
 					<div>
-						<label for='firstName'>First Name</label>
+						<label htmlFor='firstName'>First Name</label>
 						<input
 							id='firstName'
 							name='firstName'
 							onChange={handleChange}></input>
 					</div>
 					<div>
-						<label for='lastName'>Last Name</label>
+						<label htmlFor='lastName'>Last Name</label>
 						<input
 							id='lastName'
 							name='lastName'
 							onChange={handleChange}></input>
 					</div>
 					<div>
-						<label for='email'>Email</label>
+						<label htmlFor='email'>Email</label>
 						<input
 							id='email'
 							name='email'

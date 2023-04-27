@@ -14,14 +14,38 @@ import { Navbar, Nav, NavbarBrand } from 'reactstrap';
  * App -> Navigation
  *
  */
-function Navigation() {
+function Navigation({ currentUser }) {
 	return (
 		<Navbar className='Navigation'>
 			<NavbarBrand href='/'>Jobly</NavbarBrand>
-			<Nav>
-				<NavLink to='/companies' className={'Navigation-item'}>Companies</NavLink>
-				<NavLink to='/jobs' className={'Navigation-item'}>Jobs</NavLink>
-			</Nav>
+
+			{currentUser ? (
+				<Nav>
+					<NavLink
+						to='/companies'
+						className={'Navigation-item'}>
+						Companies
+					</NavLink>
+					<NavLink
+						to='/jobs'
+						className={'Navigation-item'}>
+						Jobs
+					</NavLink>
+				</Nav>
+			) : (
+				<Nav>
+					<NavLink
+						to='/login'
+						className={'Navgation-item'}>
+						Login
+					</NavLink>
+					<NavLink
+						to='/signup'
+						className={'Navgation-item'}>
+						Sign Up
+					</NavLink>
+				</Nav>
+			)}
 		</Navbar>
 	);
 }

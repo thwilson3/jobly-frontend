@@ -41,7 +41,7 @@ class JoblyApi {
 
 	static async getCompany(handle) {
 		let res = await this.request(`companies/${handle}`);
-    console.log("res getCompany", res);
+		console.log('res getCompany', res);
 		return res.company;
 	}
 
@@ -55,7 +55,8 @@ class JoblyApi {
 		return res.companies;
 	}
 
-  static async getJobs(query = {}) {
+	/** Get array of all jobs. Also filter by name if passed query parameter. */
+	static async getJobs(query = {}) {
 		const res =
 			query.size === 0
 				? await this.request(`jobs/`)
@@ -63,6 +64,15 @@ class JoblyApi {
 		return res.jobs;
 	}
 
+	static async signUp(userData) {
+		const res = await this.request(`auth/register/`, userData, 'post');
+		this.token = res.token;
+		const currentUserData = {
+			username: userData.username,
+			firstName: userData.firstName,
+		};
+		return currentUserData;
+	}
 }
 
 export default JoblyApi;
