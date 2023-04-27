@@ -5,7 +5,8 @@ import { useState } from "react";
  * Renders a search form with submit button.
  *
  * Props:
- *  - none
+ *  - applyFilter() - function
+ *  - searchTerm - string
  *
  * State:
  * - none
