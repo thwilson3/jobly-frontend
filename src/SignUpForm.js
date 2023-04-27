@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /**
  *
@@ -15,6 +16,7 @@ import { useState } from 'react';
  *
  */
 function SignUpForm({ handleRequest }) {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -26,6 +28,7 @@ function SignUpForm({ handleRequest }) {
 	function handleSubmit(evt) {
     evt.preventDefault();
     handleRequest(formData);
+		navigate('/');
   }
 
 	function handleChange(evt) {
