@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Alert from './Alert';
 
 /**
  *
@@ -17,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
  */
 function SignUpForm({ handleRequest }) {
 	const navigate = useNavigate();
+  const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -25,12 +27,21 @@ function SignUpForm({ handleRequest }) {
 		email: '',
 	});
 
-	function handleSubmit(evt) {
-    evt.preventDefault();
-    handleRequest(formData);
-		navigate('/');
-  }
 
+    async function handleSubmit(evt) {
+      evt.preventDefault();
+      try{
+        await handleRequest(formData);
+        console.log("INSIDE TRY");
+        navigate('/');
+      } catch(err) {
+        console.log("INSIDE CATCH");
+        console.log("err", err);
+        setError(err[0])
+      }
+    }
+
+  console.log("error", error);
 	function handleChange(evt) {
 		const { name, value } = evt.target;
 		setFormData(fData => ({
@@ -42,6 +53,7 @@ function SignUpForm({ handleRequest }) {
 	return (
 		<div className='SignUpForm'>
 			<h1>Sign up</h1>
+      {error && <Alert error={error}/>}
 			<div className='SignUpForm-card card'>
 				<form
 					id='SignUpForm-form'

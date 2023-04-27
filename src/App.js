@@ -25,8 +25,8 @@ function App() {
 	const [userToken, setUserToken] = useState(null);
 
 	async function handleRegisterRequest(userData) {
-		const token = await JoblyApi.signUp(userData);
-		setUserToken(token)
+			const token = await JoblyApi.signUp(userData);
+			setUserToken(token)
 	}
 
 	useEffect(
