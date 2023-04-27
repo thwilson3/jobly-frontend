@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-
+import { Navbar, Nav, NavbarBrand } from 'reactstrap';
 /**
  *
  * Renders a navbar.
@@ -15,14 +15,15 @@ import './Navigation.css';
  *
  */
 function Navigation() {
-  return(
-    <div className="Navigation">
-      <NavLink to='/'>Home</NavLink>
-      <NavLink to='/companies'>Companies</NavLink>
-      <NavLink to='/jobs'>Jobs</NavLink>
-    </div>
-  )
+	return (
+		<Navbar className='Navigation'>
+			<NavbarBrand href='/'>Jobly</NavbarBrand>
+			<Nav>
+				<NavLink to='/companies' className={'Navigation-item'}>Companies</NavLink>
+				<NavLink to='/jobs' className={'Navigation-item'}>Jobs</NavLink>
+			</Nav>
+		</Navbar>
+	);
 }
-
 
 export default Navigation;

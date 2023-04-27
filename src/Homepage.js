@@ -1,4 +1,4 @@
-
+import './Homepage.css';
 /** Renders homepage
  *
  *  props:
@@ -12,7 +12,8 @@
 function Homepage() {
   return (
     <div className="Homepage">
-      <h1>Homepage</h1>
+      <h1>Jobly</h1>
+      <h2>Your job. Simplified.</h2>
     </div>
   )
 };

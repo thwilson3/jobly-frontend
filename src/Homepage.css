@@ -1,0 +1,17 @@
+.Homepage {
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../public/assets/homepage.jpg');
+    background-size:cover;
+}
+
+.Homepage h1 {
+    color:white;
+}
+
+.Homepage h2 {
+    color: wheat;
+}
