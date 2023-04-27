@@ -28,8 +28,10 @@ function CompanyCard({ companyData }) {
 						alt={name}
 					/>
 				)}
-				<h3>{name}</h3>
-				<p>{description}</p>
+				<div className='card-body'>
+					<h3>{name}</h3>
+					<p>{description}</p>
+				</div>
 			</Link>
 		</div>
 	);

@@ -1,3 +1,16 @@
-.Navigation a.active {
+/* .Navigation a.active {
     font-weight: bold;
+} */
+
+.Navigation-item {
+    padding: 5px;
+    text-decoration: none;
+}
+
+.Navigation-item.active {
+    font-weight: bold;
+}
+
+.Navigation {
+    background-color: lightgray;
 }
