@@ -25,28 +25,22 @@ function App() {
 	const [userToken, setUserToken] = useState(null);
 
 	async function handleRegisterRequest(userData) {
-			const token = await JoblyApi.signUp(userData);
-			setUserToken(token)
+		const token = await JoblyApi.signUp(userData);
+		console.log('token', token);
+		setUserToken(token);
 	}
 
 	useEffect(
-    function fetchCurrentUserDataOnChange() {
-      async function fetchCurrentUserData() {
-        try {
-					const { username } = jwt_decode(userToken)
-					console.log("username", username);
-          setCurrentUser(await JoblyApi.getUser({ username: username }));
-
-        } catch (error) {
-
-        }
-      }
-      fetchCurrentUserData();
-    },
-    [userToken]
-  );
-
-
+		function fetchCurrentUserDataOnChange() {
+			async function fetchCurrentUserData() {
+				const { username } = jwt_decode(userToken);
+				console.log('username', username);
+				setCurrentUser(await JoblyApi.getUser(username));
+			}
+			fetchCurrentUserData();
+		},
+		[userToken]
+	);
 
 	return (
 		<div className='App'>

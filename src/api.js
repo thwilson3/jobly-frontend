@@ -76,7 +76,8 @@ class JoblyApi {
    */
   static async getUser(currentUser) {
     const res = await this.request(`users/${currentUser}`);
-    const { username, firstName, isAdmin, jobs } = res;
+    console.log('res getUser', res);
+    const { username, firstName, isAdmin, jobs } = res.user;
 
     return {
       username,

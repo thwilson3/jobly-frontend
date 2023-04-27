@@ -32,16 +32,16 @@ function SignUpForm({ handleRequest }) {
       evt.preventDefault();
       try{
         await handleRequest(formData);
-        console.log("INSIDE TRY");
+        // console.log("INSIDE TRY");
         navigate('/');
       } catch(err) {
-        console.log("INSIDE CATCH");
-        console.log("err", err);
+        // console.log("INSIDE CATCH");
+        // console.log("err", err);
         setError(err[0])
       }
     }
 
-  console.log("error", error);
+  // console.log("error", error);
 	function handleChange(evt) {
 		const { name, value } = evt.target;
 		setFormData(fData => ({
