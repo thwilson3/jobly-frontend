@@ -84,6 +84,8 @@ class JoblyApi {
 	 */
 	// TODO: Code review: Thoughts on passing all of this data into context? Too
 	// much?
+	// TODO: can just store imperative info in context, pass entire currUser obj
+	// wherever needed
 	static async getUser(currentUser) {
 		const res = await this.request(`users/${currentUser}`);
 		console.log('res getUser', res);

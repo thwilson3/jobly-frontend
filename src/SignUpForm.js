@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
 
 /**
- *
+ * //TODO: update docstring
  * Renders sign up form and makes request to register user and login
  *
  * Props:
@@ -47,6 +47,7 @@ function SignUpForm({ handleRequest }) {
 		}));
 	}
 
+  //TODO: control input values
 	return (
 		<div className='SignUpForm'>
 			<h1>Sign up</h1>

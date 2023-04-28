@@ -8,7 +8,7 @@ import SignUpForm from './SignUpForm';
 import ProfileForm from './ProfileForm';
 
 /**
- *
+ * //TODO: update docstring
  * Renders route components
  *
  * Props:
@@ -55,6 +55,7 @@ function RoutesList({
 				path='/profile'
 				element={<ProfileForm handleRequest={handleProfileRequest} />}
 			/>
+      {/* //TODO: remove this route */}
 			<Route
 				path='/logout'
 				element={<ProfileForm />}

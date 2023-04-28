@@ -8,7 +8,7 @@ import userContext from "./userContext";
 import jwt_decode from "jwt-decode";
 
 /**
- *
+ * //TODO: update docstring
  * Renders App
  *
  * Props:
@@ -24,6 +24,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [userToken, setUserToken] = useState(null);
 
+	useEffect(
+		function fetchCurrentUserDataOnChange() {
+			async function fetchCurrentUserData() {
+				const { username } = jwt_decode(userToken);
+				console.log("username", username);
+				//TODO: make API call outside of setCurrentUser
+				setCurrentUser(await JoblyApi.getUser(username));
+			}
+			if (userToken) fetchCurrentUserData();
+		},
+		[userToken]
+	);
+
+	//TODO: add docstrings for these functions, could simplify names as well
   async function handleRegisterRequest(userData) {
     const token = await JoblyApi.signUp(userData);
     setUserToken(token);
@@ -45,17 +59,6 @@ function App() {
 		setUserToken(null);
 }
 
-  useEffect(
-    function fetchCurrentUserDataOnChange() {
-      async function fetchCurrentUserData() {
-        const { username } = jwt_decode(userToken);
-        console.log("username", username);
-        setCurrentUser(await JoblyApi.getUser(username));
-      }
-      if (userToken) fetchCurrentUserData();
-    },
-    [userToken]
-  );
 
   return (
     <div className="App">
