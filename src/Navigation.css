@@ -5,6 +5,7 @@
 .Navigation-item {
     padding: 5px;
     text-decoration: none;
+    color: black;
 }
 
 .Navigation-item.active {
