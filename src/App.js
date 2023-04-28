@@ -34,6 +34,11 @@ function App() {
 		setUserToken(token);
 	}
 
+	async function handleProfileRequest(userData) {
+		const user = await JoblyApi.updateProfile(userData);
+		setCurrentUser(user);
+	}
+
 	useEffect(
 		function fetchCurrentUserDataOnChange() {
 			async function fetchCurrentUserData() {
@@ -54,6 +59,7 @@ function App() {
 					<RoutesList
 						handleRegisterRequest={handleRegisterRequest}
 						handleLoginRequest={handleLoginRequest}
+						handleProfileRequest={handleProfileRequest}
 					/>
 				</BrowserRouter>
 			</userContext.Provider>
