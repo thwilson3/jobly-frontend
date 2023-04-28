@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
 
 /**
- * //TODO: update docstring
  * Renders sign up form and makes request to register user and login
  *
  * Props:
  *  - handleRequest(): submit request to backend
  *
  * State:
- * - formData
+ * - formData - object
+ * - error - string
  *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail,
  *                      JobList, LoginForm, SignUpForm, ProfileForm }
@@ -18,7 +18,7 @@ import Alert from './Alert';
  */
 function SignUpForm({ handleRequest }) {
 	const navigate = useNavigate();
-  const [error, setError] = useState(null);
+	const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -27,18 +27,18 @@ function SignUpForm({ handleRequest }) {
 		email: '',
 	});
 
+	/** Handle the server request and sign up the user. Redirect to home. */
+	async function handleSubmit(evt) {
+		evt.preventDefault();
+		try {
+			await handleRequest(formData);
+			navigate('/');
+		} catch (err) {
+			setError(err[0]);
+		}
+	}
 
-    async function handleSubmit(evt) {
-      evt.preventDefault();
-      try{
-        await handleRequest(formData);
-        navigate('/');
-      } catch(err) {
-        setError(err[0])
-      }
-    }
-
-  // console.log("error", error);
+	/** Update the formData state with current values from input fields */
 	function handleChange(evt) {
 		const { name, value } = evt.target;
 		setFormData(fData => ({
@@ -47,11 +47,10 @@ function SignUpForm({ handleRequest }) {
 		}));
 	}
 
-  //TODO: control input values
 	return (
 		<div className='SignUpForm'>
 			<h1>Sign up</h1>
-      {error && <Alert error={error}/>}
+			{error && <Alert error={error} />}
 			<div className='SignUpForm-card card'>
 				<form
 					id='SignUpForm-form'
@@ -61,6 +60,7 @@ function SignUpForm({ handleRequest }) {
 						<input
 							id='username'
 							name='username'
+							value={formData.username}
 							onChange={handleChange}></input>
 					</div>
 
@@ -70,6 +70,7 @@ function SignUpForm({ handleRequest }) {
 							id='password'
 							name='password'
 							type='password'
+							value={formData.password}
 							onChange={handleChange}></input>
 					</div>
 					<div>
@@ -77,6 +78,7 @@ function SignUpForm({ handleRequest }) {
 						<input
 							id='firstName'
 							name='firstName'
+							value={formData.firstName}
 							onChange={handleChange}></input>
 					</div>
 					<div>
@@ -84,6 +86,7 @@ function SignUpForm({ handleRequest }) {
 						<input
 							id='lastName'
 							name='lastName'
+							value={formData.lastName}
 							onChange={handleChange}></input>
 					</div>
 					<div>
@@ -92,6 +95,7 @@ function SignUpForm({ handleRequest }) {
 							id='email'
 							name='email'
 							type='email'
+							value={formData.email}
 							onChange={handleChange}></input>
 					</div>
 					<div>

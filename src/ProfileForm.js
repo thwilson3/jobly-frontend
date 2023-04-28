@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
-import userContext from './userContext';
 
 /**
  *
@@ -9,18 +8,22 @@ import userContext from './userContext';
  *
  * Props:
  *  - handleRequest(): submit request to backend
+ *  - currentUser - object
  *
  * State:
- * - formData
+ * - formData - object
+ * - error - string
+ *
+ * Context:
+ * - currentUser
  *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail,
  *                      JobList, LoginForm, SignUpForm, ProfileForm }
  *
  */
-function ProfileForm({handleRequest}) {
+function ProfileForm({ handleRequest, currentUser }) {
 	const navigate = useNavigate();
-  const {currentUser} = useContext(userContext);
-  const [error, setError] = useState(null);
+	const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: currentUser?.username,
 		firstName: currentUser?.firstName,
@@ -28,16 +31,18 @@ function ProfileForm({handleRequest}) {
 		email: currentUser?.email,
 	});
 
-    async function handleSubmit(evt) {
-      evt.preventDefault();
-      try{
-        await handleRequest(formData);
-        navigate('/');
-      } catch(err) {
-        setError(err[0])
-      }
-    }
+	/** Handle the server request and update the user profile */
+	async function handleSubmit(evt) {
+		evt.preventDefault();
+		try {
+			await handleRequest(formData);
+			navigate('/');
+		} catch (err) {
+			setError(err[0]);
+		}
+	}
 
+	/** Update the formData state whenever the input fields are updated. */
 	function handleChange(evt) {
 		const { name, value } = evt.target;
 		setFormData(fData => ({
@@ -47,12 +52,12 @@ function ProfileForm({handleRequest}) {
 	}
 
 	return (
-		<div className='SignUpForm'>
+		<div className='ProfileForm'>
 			<h1>Profile</h1>
-      {error && <Alert error={error}/>}
-			<div className='SignUpForm-card card'>
+			{error && <Alert error={error} />}
+			<div className='ProfileForm-card card'>
 				<form
-					id='SignUpForm-form'
+					id='ProfileForm-form'
 					onSubmit={handleSubmit}>
 					<div>
 						<label htmlFor='username'>Username</label>
@@ -60,8 +65,8 @@ function ProfileForm({handleRequest}) {
 							id='username'
 							name='username'
 							onChange={handleChange}
-              value={formData.username}
-              disabled></input>
+							value={formData.username}
+							disabled></input>
 					</div>
 					<div>
 						<label htmlFor='firstName'>First Name</label>
@@ -69,7 +74,7 @@ function ProfileForm({handleRequest}) {
 							id='firstName'
 							name='firstName'
 							onChange={handleChange}
-              value={formData.firstName}></input>
+							value={formData.firstName}></input>
 					</div>
 					<div>
 						<label htmlFor='lastName'>Last Name</label>
@@ -77,7 +82,7 @@ function ProfileForm({handleRequest}) {
 							id='lastName'
 							name='lastName'
 							onChange={handleChange}
-              value={formData.lastName}></input>
+							value={formData.lastName}></input>
 					</div>
 					<div>
 						<label htmlFor='email'>Email</label>
@@ -86,7 +91,7 @@ function ProfileForm({handleRequest}) {
 							name='email'
 							type='email'
 							onChange={handleChange}
-              value={formData.email}></input>
+							value={formData.email}></input>
 					</div>
 					<div>
 						<button type='submit'>Submit</button>
@@ -95,6 +100,6 @@ function ProfileForm({handleRequest}) {
 			</div>
 		</div>
 	);
-};
+}
 
 export default ProfileForm;

@@ -12,13 +12,13 @@ import userContext from './userContext';
  *  Routes -> Homepage
 */
 function Homepage() {
-  const { currentUser } = useContext(userContext);
+  const { activeUser } = useContext(userContext);
 
   return (
     <div className="Homepage">
       <h1>Jobly</h1>
       <h2>Your job. Simplified.</h2>
-      {currentUser?.firstName && <h2>Welcome back, {currentUser.firstName}.</h2>}
+      {activeUser?.firstName && <h2>Welcome back, {activeUser.firstName}.</h2>}
     </div>
   )
 };

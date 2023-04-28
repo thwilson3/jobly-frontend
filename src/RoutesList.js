@@ -8,11 +8,13 @@ import SignUpForm from './SignUpForm';
 import ProfileForm from './ProfileForm';
 
 /**
- * //TODO: update docstring
  * Renders route components
  *
  * Props:
- *  - none
+ *  - register - function
+ *  - login - function
+ *  - profile - function
+ *  - currentUser - object
  *
  * State:
  * - none
@@ -20,11 +22,7 @@ import ProfileForm from './ProfileForm';
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
  *
  */
-function RoutesList({
-	handleRegisterRequest,
-	handleLoginRequest,
-	handleProfileRequest,
-}) {
+function RoutesList({ register, login, profile, currentUser }) {
 	return (
 		<Routes>
 			<Route
@@ -45,20 +43,15 @@ function RoutesList({
 			/>
 			<Route
 				path='/login'
-				element={<LoginForm handleRequest={handleLoginRequest} />}
+				element={<LoginForm handleRequest={login} />}
 			/>
 			<Route
 				path='/signup'
-				element={<SignUpForm handleRequest={handleRegisterRequest} />}
+				element={<SignUpForm handleRequest={register} />}
 			/>
 			<Route
 				path='/profile'
-				element={<ProfileForm handleRequest={handleProfileRequest} />}
-			/>
-      {/* //TODO: remove this route */}
-			<Route
-				path='/logout'
-				element={<ProfileForm />}
+				element={<ProfileForm handleRequest={profile} currentUser={currentUser} />}
 			/>
 			<Route
 				path='*'

@@ -6,10 +6,10 @@ import { useState } from "react";
  *
  * Props:
  *  - applyFilter() - function
- *  - searchTerm - string
+ *  - searchTerm (optional) - string
  *
  * State:
- * - none
+ * - formValue - string
  *
  * { CompanyList, JobList } -> SearchForm
  *
@@ -18,12 +18,14 @@ function SearchForm({ applyFilter, searchTerm=null }) {
   const [formValue, setFormValue] = useState(searchTerm);
   console.log("formval", formValue);
 
+  /** Handle server request get a filtered list of companies based on search term. */
   function handleSearch(evt) {
     evt.preventDefault();
     const searchTerm = evt.target.searchTerm.value;
     applyFilter(searchTerm);
   }
 
+  /** Update the formValue state when the search term field is updated. */
   function handleChange(evt) {
     setFormValue(evt.target.value);
     console.log("evt target value", evt.target.value);
