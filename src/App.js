@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import RoutesList from './RoutesList';
 import Navigation from './Navigation';
 import JoblyApi from './api';
@@ -26,10 +26,13 @@ import jwt_decode from 'jwt-decode';
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [userToken, setUserToken] = useState(JoblyApi.token);
+  const [isLoading, setIsLoading] = useState(true);
 	let activeUser = {
 		username: currentUser?.username,
 		firstName: currentUser?.firstName,
 	};
+
+  const navigate = useNavigate();
 
 	useEffect(
 		function fetchCurrentUserDataOnChange() {
@@ -38,14 +41,15 @@ function App() {
 				console.log('username', username);
 				const user = await JoblyApi.getUser(username);
 				setCurrentUser(user);
+        setIsLoading(false);
 			}
-
 			if (userToken) {
-        fetchCurrentUserData();
-        localStorage.setItem('userToken', userToken);
-      } else {
-        localStorage.removeItem('userToken');
-      }
+				fetchCurrentUserData();
+				localStorage.setItem('userToken', userToken);
+			} else {
+				localStorage.removeItem('userToken');
+        setIsLoading(false)
+			}
 		},
 		[userToken]
 	);
@@ -73,20 +77,21 @@ function App() {
 	function handleLogout() {
 		setCurrentUser(null);
 		setUserToken(null);
+    navigate('/');
 	}
+
+  if (isLoading) return <p>Loading...</p>;
 
 	return (
 		<div className='App'>
 			<userContext.Provider value={{ activeUser }}>
-				<BrowserRouter>
-					<Navigation handleLogout={handleLogout} />
-					<RoutesList
-						register={register}
-						login={login}
-						profile={profile}
-						currentUser={currentUser}
-					/>
-				</BrowserRouter>
+				<Navigation handleLogout={handleLogout} />
+				<RoutesList
+					register={register}
+					login={login}
+					profile={profile}
+					currentUser={currentUser}
+				/>
 			</userContext.Provider>
 		</div>
 	);

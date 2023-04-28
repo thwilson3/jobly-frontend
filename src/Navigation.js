@@ -24,7 +24,6 @@ import userContext from './userContext';
 function Navigation({ currentUser, handleLogout }) {
 	const { activeUser } = useContext(userContext);
 
-
 	return (
 		<Navbar className='Navigation'>
 			<NavbarBrand href='/'>Jobly</NavbarBrand>
@@ -49,7 +48,6 @@ function Navigation({ currentUser, handleLogout }) {
 					<NavLink
 						id='Navigation-logout'
 						onClick={handleLogout}
-						to={'/'}
 						className={'Navigation-item'}>
 						Log out {activeUser.username}
 					</NavLink>
