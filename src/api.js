@@ -101,10 +101,13 @@ class JoblyApi {
 
 	/** Update user profile. Return nothing */
 	static async updateProfile(userData) {
+		console.log("userData username", userData.username);
+		const { firstName, lastName, email } = userData;
+
 		const res = await this.request(
 			`users/${userData.username}`,
-			userData,
-			'post'
+			{ firstName, lastName, email },
+			'patch'
 		);
     return res.user;
 	}

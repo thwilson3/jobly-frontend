@@ -35,6 +35,7 @@ function App() {
 	}
 
 	async function handleProfileRequest(userData) {
+		console.log("inside handleprof req app.js");
 		const user = await JoblyApi.updateProfile(userData);
 		setCurrentUser(user);
 	}
