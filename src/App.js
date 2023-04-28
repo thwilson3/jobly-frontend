@@ -50,7 +50,7 @@ function App() {
 		<div className='App'>
 			<userContext.Provider value={{ currentUser }}>
 				<BrowserRouter>
-					<Navigation />
+					<Navigation currentUser={currentUser} />
 					<RoutesList
 						handleRegisterRequest={handleRegisterRequest}
 						handleLoginRequest={handleLoginRequest}

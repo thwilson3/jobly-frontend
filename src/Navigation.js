@@ -36,12 +36,12 @@ function Navigation({ currentUser }) {
 				<Nav>
 					<NavLink
 						to='/login'
-						className={'Navgation-item'}>
+						className={'Navigation-item'}>
 						Login
 					</NavLink>
 					<NavLink
 						to='/signup'
-						className={'Navgation-item'}>
+						className={'Navigation-item'}>
 						Sign Up
 					</NavLink>
 				</Nav>
