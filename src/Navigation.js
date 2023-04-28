@@ -31,6 +31,16 @@ function Navigation({ currentUser }) {
 						className={'Navigation-item'}>
 						Jobs
 					</NavLink>
+					<NavLink
+						to='/profile'
+						className={'Navigation-item'}>
+						Profile
+					</NavLink>
+					<NavLink
+						to='/logout'
+						className={'Navigation-item'}>
+						Log out {currentUser.username}
+					</NavLink>
 				</Nav>
 			) : (
 				<Nav>

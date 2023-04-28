@@ -52,6 +52,10 @@ function RoutesList({ handleRegisterRequest, handleLoginRequest }) {
 				element={<ProfileForm />}
 			/>
 			<Route
+				path='/logout'
+				element={<ProfileForm />}
+			/>
+			<Route
 				path='*'
 				element={<Navigate to='/' />}
 			/>
