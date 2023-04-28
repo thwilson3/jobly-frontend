@@ -1,12 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import { Navbar, Nav, NavbarBrand } from 'reactstrap';
+
 /**
  *
  * Renders a navbar.
  *
  * Props:
- *  - none
+ *  - currentUser
+ * 	- handleLogout() : function
  *
  * State:
  * - none
@@ -14,7 +16,7 @@ import { Navbar, Nav, NavbarBrand } from 'reactstrap';
  * App -> Navigation
  *
  */
-function Navigation({ currentUser }) {
+function Navigation({ currentUser, handleLogout }) {
 	return (
 		<Navbar className='Navigation'>
 			<NavbarBrand href='/'>Jobly</NavbarBrand>
@@ -37,7 +39,8 @@ function Navigation({ currentUser }) {
 						Profile
 					</NavLink>
 					<NavLink
-						to='/logout'
+						onClick={handleLogout}
+						to={'/'}
 						className={'Navigation-item'}>
 						Log out {currentUser.username}
 					</NavLink>

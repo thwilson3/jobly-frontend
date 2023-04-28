@@ -22,12 +22,12 @@ function ProfileForm({handleRequest}) {
   const {currentUser} = useContext(userContext);
   const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
-		username: currentUser.username,
-		firstName: currentUser.firstName,
-		lastName: currentUser.lastName,
-		email: currentUser.email,
+		username: currentUser?.username,
+		firstName: currentUser?.firstName,
+		lastName: currentUser?.lastName,
+		email: currentUser?.email,
 	});
-    // FIXME: We are stuck on this patch request not working! Fix!
+
     async function handleSubmit(evt) {
       evt.preventDefault();
       try{
