@@ -20,7 +20,7 @@ import ProfileForm from './ProfileForm';
  * - none
  *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
- *
+ * 
  */
 function RoutesList({ register, login, profile, currentUser }) {
 	return (

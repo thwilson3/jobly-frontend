@@ -22,7 +22,7 @@ import jwt_decode from 'jwt-decode';
  */
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
-	const [userToken, setUserToken] = useState(null);
+	const [userToken, setUserToken] = useState(JoblyApi.token);
 	let activeUser = {
 		username: currentUser?.username,
 		firstName: currentUser?.firstName,
@@ -36,10 +36,22 @@ function App() {
 				const user = await JoblyApi.getUser(username);
 				setCurrentUser(user);
 			}
-			if (userToken) fetchCurrentUserData();
+      
+			if (userToken) {
+        fetchCurrentUserData();
+        localStorage.setItem('userToken', userToken);
+      } else {
+        localStorage.removeItem('userToken');
+      }
 		},
 		[userToken]
 	);
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('userToken')) {
+  //     setUserToken(localStorage.getItem('userToken'));
+  //   }
+  // }, [])
 
 	/** Submit server request to register user. */
 	async function register(userData) {
