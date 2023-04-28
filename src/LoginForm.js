@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Alert from './Alert';
 
 /**
  *
@@ -15,15 +17,22 @@ import { useState } from 'react';
  *
  */
 function LoginForm({handleRequest}) {
+	const navigate = useNavigate();
+  const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
 	});
 
-	function handleSubmit(evt) {
-    evt.preventDefault();
-    handleRequest(formData);
-  }
+	async function handleSubmit(evt) {
+		evt.preventDefault();
+		try{
+			await handleRequest(formData);
+			navigate('/');
+		} catch(err) {
+			setError(err[0])
+		}
+	}
 
 	function handleChange(evt) {
 		const { name, value } = evt.target;
@@ -36,12 +45,13 @@ function LoginForm({handleRequest}) {
 	return (
 		<div className='SignUpForm'>
 			<h1>Log in</h1>
+			{error && <Alert error={error}/>}
 			<div className='SignUpForm-card card'>
 				<form
 					id='SignUpForm-form'
 					onSubmit={handleSubmit}>
 					<div>
-						<label for='username'>Username</label>
+						<label htmlFor='username'>Username</label>
 						<input
 							id='username'
 							name='username'
@@ -49,7 +59,7 @@ function LoginForm({handleRequest}) {
 					</div>
 
 					<div>
-						<label for='password'>Password</label>
+						<label htmlFor='password'>Password</label>
 						<input
 							id='password'
 							name='password'

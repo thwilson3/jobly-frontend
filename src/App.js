@@ -26,7 +26,11 @@ function App() {
 
 	async function handleRegisterRequest(userData) {
 		const token = await JoblyApi.signUp(userData);
-		console.log('token', token);
+		setUserToken(token);
+	}
+
+	async function handleLoginRequest(userData) {
+		const token = await JoblyApi.login(userData);
 		setUserToken(token);
 	}
 
@@ -37,7 +41,7 @@ function App() {
 				console.log('username', username);
 				setCurrentUser(await JoblyApi.getUser(username));
 			}
-			fetchCurrentUserData();
+			if (userToken) fetchCurrentUserData();
 		},
 		[userToken]
 	);
@@ -47,7 +51,10 @@ function App() {
 			<userContext.Provider value={{ currentUser }}>
 				<BrowserRouter>
 					<Navigation />
-					<RoutesList handleRegisterRequest={handleRegisterRequest} />
+					<RoutesList
+						handleRegisterRequest={handleRegisterRequest}
+						handleLoginRequest={handleLoginRequest}
+					/>
 				</BrowserRouter>
 			</userContext.Provider>
 		</div>

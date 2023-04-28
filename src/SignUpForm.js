@@ -32,11 +32,8 @@ function SignUpForm({ handleRequest }) {
       evt.preventDefault();
       try{
         await handleRequest(formData);
-        // console.log("INSIDE TRY");
         navigate('/');
       } catch(err) {
-        // console.log("INSIDE CATCH");
-        // console.log("err", err);
         setError(err[0])
       }
     }

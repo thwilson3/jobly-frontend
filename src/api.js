@@ -70,6 +70,13 @@ class JoblyApi {
     this.token = res.token;
     return this.token;
   }
+
+  static async login(userData) {
+    const res = await this.request(`auth/token`, userData, "post")
+    this.token = res.token;
+    return this.token;
+  }
+
   /**
    * Returns { username, firstName, isAdmin, jobs }
    *   where jobs is { id, title, companyHandle, companyName, state }

@@ -20,7 +20,7 @@ import ProfileForm from './ProfileForm';
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
  *
  */
-function RoutesList({ handleRegisterRequest }) {
+function RoutesList({ handleRegisterRequest, handleLoginRequest }) {
 	return (
 		<Routes>
 			<Route
@@ -41,7 +41,7 @@ function RoutesList({ handleRegisterRequest }) {
 			/>
 			<Route
 				path='/login'
-				element={<LoginForm />}
+				element={<LoginForm handleRequest={handleLoginRequest} />}
 			/>
 			<Route
 				path='/signup'
