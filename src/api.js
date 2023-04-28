@@ -11,9 +11,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
  */
 
 class JoblyApi {
-	// Remember, the backend needs to be authorized with a token
-	// We're providing a token you can use to interact with the backend API
-	// DON'T MODIFY THIS TOKEN
+
+	//TODO: remove local storage from api access
 	static token = localStorage.getItem('userToken');
 
 	static async request(endpoint, data = {}, method = 'get') {
