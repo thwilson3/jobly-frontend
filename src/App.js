@@ -17,6 +17,9 @@ import jwt_decode from 'jwt-decode';
  * - currentUser - object
  * - userToken - string
  *
+ * Context:
+ * - activeUser
+ *
  * App -> { Navigation, RoutesList }
  *
  */
@@ -36,7 +39,7 @@ function App() {
 				const user = await JoblyApi.getUser(username);
 				setCurrentUser(user);
 			}
-      
+
 			if (userToken) {
         fetchCurrentUserData();
         localStorage.setItem('userToken', userToken);
@@ -46,12 +49,6 @@ function App() {
 		},
 		[userToken]
 	);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('userToken')) {
-  //     setUserToken(localStorage.getItem('userToken'));
-  //   }
-  // }, [])
 
 	/** Submit server request to register user. */
 	async function register(userData) {
@@ -72,6 +69,7 @@ function App() {
 		setCurrentUser(user);
 	}
 
+	/** Logs out user, clears token and currentUser */
 	function handleLogout() {
 		setCurrentUser(null);
 		setUserToken(null);

@@ -15,6 +15,9 @@ import userContext from './userContext';
  * State:
  * - none
  *
+ * Context:
+ * - activeUser
+ *
  * App -> Navigation
  *
  */
@@ -44,6 +47,7 @@ function Navigation({ currentUser, handleLogout }) {
 						Profile
 					</NavLink>
 					<NavLink
+						id='Navigation-logout'
 						onClick={handleLogout}
 						to={'/'}
 						className={'Navigation-item'}>

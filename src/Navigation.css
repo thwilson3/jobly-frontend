@@ -14,3 +14,7 @@
 .Navigation {
     background-color: lightgray;
 }
+
+#Navigation-logout {
+    font-weight: normal !important;
+}
